@@ -89,10 +89,10 @@ resource "aws_iam_role_policy_attachment" "EC2_policies" {
 resource "aws_db_instance" "rds_app" {
   allocated_storage    = 10
   engine               = "postgres"
-  engine_version       = "15.3"
-  instance_class       = "db.t3.micro"
+  engine_version       = "17.6"
+  instance_class       = "db.t4g.micro"
   identifier           = "winx-database-1"
-  name                 = "winxdb"
+  db_name                 = "winxdb"
   username             = "postgres"
   password             = "cRF2Rd57gtVKfMS"
   skip_final_snapshot  = true
