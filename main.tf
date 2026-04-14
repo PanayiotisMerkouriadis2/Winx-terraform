@@ -60,7 +60,28 @@ resource "aws_iam_role" "example_app_ec2_role" {
     ]
   })
 }
-resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+
+resource "aws_iam_role_policy_attachment" "EC2_policies" {
+  for_each = toset(var.ec2-policy-arns)
+
   role       = aws_iam_role.example_app_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+  policy_arn = each.value
 }
+
+
+
+# list all three policy arns seperately, incase above does not work
+# resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+#   role       = aws_iam_role.example_app_ec2_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+# }
+
+# resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+#   role       = aws_iam_role.example_app_ec2_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+# }
+
+# resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+#   role       = aws_iam_role.example_app_ec2_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+# }
