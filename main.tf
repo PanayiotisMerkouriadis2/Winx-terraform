@@ -91,10 +91,10 @@ resource "aws_db_instance" "rds_app" {
   engine               = "postgres"
   engine_version       = "15.3"
   instance_class       = "db.t3.micro"
-  identifier           = "<your-team>-example-app-prod"
-  name                 = "<your-team>-example-app-database-name"
-  username             = "root"
-  password             = "password"
+  identifier           = "winx-database-1"
+  name                 = "winxdb"
+  username             = "postgres"
+  password             = "cRF2Rd57gtVKfMS"
   skip_final_snapshot  = true
   publicly_accessible = true
 }
