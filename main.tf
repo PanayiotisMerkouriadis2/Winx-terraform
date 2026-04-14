@@ -85,3 +85,16 @@ resource "aws_iam_role_policy_attachment" "EC2_policies" {
 #   role       = aws_iam_role.example_app_ec2_role.name
 #   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
 # }
+
+resource "aws_db_instance" "rds_app" {
+  allocated_storage    = 10
+  engine               = "postgres"
+  engine_version       = "15.3"
+  instance_class       = "db.t3.micro"
+  identifier           = "<your-team>-example-app-prod"
+  name                 = "<your-team>-example-app-database-name"
+  username             = "root"
+  password             = "password"
+  skip_final_snapshot  = true
+  publicly_accessible = true
+}
