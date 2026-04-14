@@ -1,9 +1,13 @@
-name: Winx Terraform Plan
+name: Terraform Plan
 
 on:
   pull_request:
     branches:
       - main
+    paths:
+      - "**/*.tf"
+      - ".github/workflows/terraform-plan.yml"
+      - ".github/workflows/terraform-apply.yml"
 
 jobs:
   terraform-plan:
@@ -15,7 +19,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repository
+      - name: Check out code
         uses: actions/checkout@v4
 
       - name: Setup Terraform
@@ -35,7 +39,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Validate
-        run: terraform validate
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         run: terraform plan -no-color -input=false

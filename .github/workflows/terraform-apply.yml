@@ -1,9 +1,13 @@
-name: Winx Terraform Apply
+name: Terraform Apply
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "**/*.tf"
+      - ".github/workflows/terraform-plan.yml"
+      - ".github/workflows/terraform-apply.yml"
 
 jobs:
   terraform-apply:
@@ -14,7 +18,7 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout repository
+      - name: Check out code
         uses: actions/checkout@v4
 
       - name: Setup Terraform
@@ -31,7 +35,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Validate
-        run: terraform validate
+        run: terraform validate -no-color
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=falsegit
