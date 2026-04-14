@@ -61,6 +61,8 @@ resource "aws_iam_role" "example_app_ec2_role" {
   })
 }
 
+# aws arns are stored in a list in variables.tf
+# This block adds all arn policies in that list to the aws_iam_role 
 resource "aws_iam_role_policy_attachment" "EC2_policies" {
   for_each = toset(var.ec2-policy-arns)
 
@@ -68,7 +70,20 @@ resource "aws_iam_role_policy_attachment" "EC2_policies" {
   policy_arn = each.value
 }
 
+# Created S3 bucket for app with a tag
+resource "aws_s3_bucket" "app_bucket" {
+  bucket = "winx-app-bucket"
 
+  tags = {
+    owner = "winx"
+  }
+}
+# Enabled bucket versioning
+resource "aws_s3_bucket_versioning" "app_bucket_ver" {
+  bucket = aws_s3_bucket.app_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 
 # list all three policy arns seperately, incase above does not work
 # resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
