@@ -28,6 +28,12 @@ resource "aws_elastic_beanstalk_environment" "example_app_environment" {
     name      = "EC2KeyName"
     value     = "winx-elastic-beanstalk-deployment"
   }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "InstanceType"
+    value     = "t3.micro"
+  }
 }
 
 resource "aws_iam_instance_profile" "example_app_ec2_instance_profile" {
@@ -53,4 +59,8 @@ resource "aws_iam_role" "example_app_ec2_role" {
       }
     ]
   })
+}
+resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+  role       = aws_iam_role.example_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
 }
