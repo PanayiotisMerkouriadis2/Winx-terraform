@@ -84,4 +84,32 @@ resource "aws_s3_bucket_versioning" "app_bucket_ver" {
   versioning_configuration {
     status = "Enabled"
   }
+
+# list all three policy arns seperately, incase above does not work
+# resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+#   role       = aws_iam_role.example_app_ec2_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+# }
+
+# resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+#   role       = aws_iam_role.example_app_ec2_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+# }
+
+# resource "aws_iam_role_policy_attachment" "beanstalk_web_tier" {
+#   role       = aws_iam_role.example_app_ec2_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+# }
+
+resource "aws_db_instance" "rds_app" {
+  allocated_storage    = 10
+  engine               = "postgres"
+  engine_version       = "17.6"
+  instance_class       = "db.t4g.micro"
+  identifier           = "winx-database-1"
+  db_name                 = "winxdb"
+  username             = "postgres"
+  password             = "cRF2Rd57gtVKfMS"
+  skip_final_snapshot  = true
+  publicly_accessible = true
 }
