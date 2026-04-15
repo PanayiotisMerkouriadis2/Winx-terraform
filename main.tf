@@ -98,3 +98,5 @@ resource "aws_db_instance" "rds_app" {
   skip_final_snapshot  = true
   publicly_accessible = true
 }
+
+# test
