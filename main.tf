@@ -87,14 +87,15 @@ resource "aws_s3_bucket_versioning" "app_bucket_ver" {
 }
 
 resource "aws_db_instance" "rds_app" {
-  allocated_storage    = 10
-  engine               = "postgres"
-  engine_version       = "17.6"
-  instance_class       = "db.t4g.micro"
-  identifier           = "winx-database-1"
-  db_name              = "winxdb"
-  username             = "postgres"
-  password             = "cRF2Rd57gtVKfMS"
-  skip_final_snapshot  = true
+  allocated_storage   = 10
+  engine              = "postgres"
+  engine_version      = "17.6"
+  instance_class      = "db.t4g.micro"
+  identifier          = "winx-database-1"
+  db_name             = "winxdb"
+  username            = "postgres"
+  password            = "cRF2Rd57gtVKfMS"
+  skip_final_snapshot = true
   publicly_accessible = true
 }
+# test
