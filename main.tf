@@ -92,7 +92,7 @@ resource "aws_db_instance" "rds_app" {
   engine_version       = "17.6"
   instance_class       = "db.t4g.micro"
   identifier           = "winx-database-1"
-  db_name                 = "winxdb"
+  db_name              = "winxdb"
   username             = "postgres"
   password             = "cRF2Rd57gtVKfMS"
   skip_final_snapshot  = true
